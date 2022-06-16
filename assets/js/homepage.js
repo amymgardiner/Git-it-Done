@@ -5,7 +5,6 @@ var repoSearchTerm = document.querySelector("#repo-search-term");
 
 var formSubmitHandler = function(event) {
     event.preventDefault();
-    console.log(event);
     // get value from input element
     var username = nameInputEl.value.trim();
 
@@ -28,9 +27,15 @@ var getUserRepos = function(user) {
         if (response.ok) {
             response.json().then(function(data) {
             displayRepos(data, user);
+
+            // check if api has paginated issues
+            if (response.headers.get("Link")) {
+                displayWarning(repo);
+            }
             });
         } else {
-            alert('Error: GitHub User Not Found');
+             // if not successful, redirect to homepage
+            document.location.replace("./index.html");
         }
     })
     .catch(function(error) {
@@ -45,8 +50,6 @@ var displayRepos = function(repos, searchTerm) {
         repoContainerEl.textContent = "No repositories found.";
         return;
     }
-    console.log(repos);
-    console.log(searchTerm);
 
     // clear old content
     repoContainerEl.textContent = "";
