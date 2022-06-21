@@ -10,4 +10,6 @@ The purpose of the app is to allow a user to find an issue they can help with on
 
 ## Link to Application
 
+https://amymgardiner.github.io/Git-it-Done/
+
 ![plot](./assets/images/Screenshot%202022-06-21%20161020.png)
